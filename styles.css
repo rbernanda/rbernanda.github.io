@@ -1,0 +1,284 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: 'Yusei Magic', sans-serif;
+  user-select: none;
+}
+
+*::selection {
+  background: none;
+}
+
+*::-moz-selection {
+  background: none;
+}
+
+body {
+  background-color:  #222020;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Yusei Magic', sans-serif;
+}
+
+.header, .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  color: #ffdf91;
+  min-height: 10vh;
+  flex-direction: column;
+  margin: 1.5rem 0rem;
+}
+
+.header p {
+  margin-top: 0.3rem;
+  font-size: 1.1rem;
+  opacity: 80%;
+  color: rgb(42, 215, 210);
+}
+
+.container {
+  flex-direction: column;
+}
+
+.input-container {
+  width: 75%;
+  height: 7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.quote-display{
+  color:  #9a9998;
+  height: 10rem;
+  line-height: 1.5em;
+  overflow: auto;
+  width: 70%;
+  background-color: #161616;
+  box-shadow: rgb(0 0 0) 0px 16px 22px -5px;
+  border: 2px solid #161616;
+  border-radius: 1rem;
+  margin: 30px 0;
+}
+
+.quote-input {
+  background-color: transparent;
+  width: 100%;
+  height: 5rem;
+  margin: auto;
+  resize: none;
+  color: #ffdf91;
+  box-shadow: rgb(0 0 0) 0px 16px 22px -5px;
+  font-family: sans-serif;
+  overflow-y: hidden;
+  border: 2px solid #A1922E;
+  border-radius: .5rem;
+  margin: 1rem;
+}
+
+.quote-container {
+  width: 37.5%;
+}
+
+.timer, .reload-button {
+  height: 5rem;
+  box-shadow: rgb(0 0 0) 0px 16px 22px -5px;
+  border-radius: 50%;
+}
+
+.timer {
+  width: 5rem;
+  background-color:  #161616;
+  margin-left: 2rem;
+  text-align: center;
+  justify-items: center;
+  font-size: 1.2rem;
+  font-weight: bolder;
+  color:  #9a9998;
+  border: 2px solid #161616;
+}
+
+.timer div {
+  margin-top: 1.5rem;
+}
+
+.reload-button{
+  width: 5rem;
+  background-color: #161616;
+  margin-left: 1rem;
+  cursor: pointer;
+  border: #161616;
+  transition: 2s;
+}
+
+.reload-button:hover{
+  zoom: 1.05;
+}
+
+.quote-display, .quote-input{
+  outline: none;
+  font-size: 2rem;
+  padding: 0.2rem 1.5rem;
+}
+
+.quote-input:focus {
+  border-color:  rgb(255, 255, 90);
+}
+
+.correct {
+  color: green;
+}
+
+.incorrect {
+  color: red;
+  text-decoration: underline;
+}
+
+.score-board {
+  color:  #9a9998;
+  height: 10rem;
+  line-height: 1.5em;
+  overflow: auto;
+  width: 70%;
+  background-color: #161616;
+  box-shadow: rgb(0 0 0) 0px 16px 22px -5px;
+  margin: 30px 0;
+  border-radius: 1rem;
+  display: none;
+}
+
+.score-board h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  margin: 10px 0;
+  width: 100%;
+  color: #9a9998;
+}
+
+.result-value {
+  border-top: 1px dotted #242526;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 110px;
+  overflow: hidden;
+}
+
+.detail-result {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.key {
+  width: 50%;
+}
+
+.value {
+  width: 50%;
+}
+
+.result-value h1 {
+  font-size: 40px;
+  color: rgb(42, 215, 210);
+}
+
+.key h4, .value h4 {
+  padding-bottom: 5px;
+}
+
+#note {
+  text-align: center;
+  margin-top: 30px;
+  color: #9a9998;
+  font-weight: 400;
+  font-style: italic;
+  display: none;
+  opacity: 80%;
+}
+
+#note span {
+  color:  rgb(42, 215, 210);
+  opacity: 80%;
+}
+
+.icon-att {
+  display: none;
+}
+
+.music {
+  margin: 50px;
+  height: 100px;
+  display: none;
+  justify-content: left;
+  justify-items: center;
+  align-items: center;
+  flex-direction: row;
+  margin-right: 80vw;
+  position: absolute;
+}
+
+#playButton {
+  height: 50%;
+  width: 50px;
+  font-size: 18px;
+  font-weight: 900;
+  cursor: pointer;
+  border-radius: .5rem;
+  outline: none;
+  border: 1px #9a9998;
+  background-color: #9a9998;
+  transition: 1.5s;
+}
+
+#playButton:hover{
+  border: 1px solid #333;
+  background-color: #333;
+  color:  #9a9998;
+}
+
+.slidecontainer {
+  height: 50%;
+  width: 100px;
+  margin: 0px 20px;
+  padding-top: 15px;
+}
+
+.slider {
+  cursor: pointer;
+}
+
+.record {
+  color: whitesmoke;
+  position: absolute;
+  display: flex;
+  justify-items: center;
+  justify-content: left;
+  font-size: 18px;
+  margin-top: 600px;
+  width: 90%;
+  margin-left: 50px;
+}
+
+.record span {
+  display: inline-block;
+  padding: 5px 0;
+  margin: 0 15px;
+}
+
+#highestAccuracy {
+  margin-left: -8px;
+}
+
+.record-title {
+ color:  rgb(42, 215, 210);
+}

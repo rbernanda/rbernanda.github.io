@@ -1,0 +1,71 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap" rel="stylesheet">
+  <link rel="icon" href="./assets/computer.png">
+  <title>JS Words Mastery</title>
+
+</head>
+<body>
+  <div class="header">
+    <div class="music" id="music">
+      <button id="playButton">&#9658</button>
+      <div class="slidecontainer">
+        <input type="range" min="0" max="100" value="60" class="slider" id="volume">
+      </div>
+    </div>
+    <h1>JS wordsMastery()</h1>
+    <p>Build your muscle memory</p>
+  </div>
+
+  <div class="container">
+    <div class="quote-display" id="quoteDisplay"></div>
+    <div class="score-board" id="scoreBoard">
+      <h1>Your Result...</h1>
+      <div class="result-value">
+        <h1 id="totalcpm">100 CPM</h1>
+        <div class="detail-result">
+          <div class="key">
+            <h4>Accuracy</h4>
+            <h4>Correct Characters</h4>
+            <h4>Wrong Characters</h4>
+          </div>
+          <div class="value">
+            <h4 id="accuracyValue"></h4>
+            <h4 id="correctChart"></h4>
+            <h4 id="wrongChart"></h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class = input-container>
+      <div class="quote-container">
+        <textarea class="quote-input" id="quoteInput" autofocus></textarea>
+      </div>
+
+      <div class="timer">
+        <div id="timer" >
+          1:00
+      </div>
+    </div>
+
+      <div id="button">
+        <button class="reload-button">
+          <img src="./assets/refresh.png" width="45px" height="45px">
+        </button>
+      </div>
+  </div>
+
+  <h4 id="note">*to play again hit the <span>reload button</span>, in case you're lazy simply press <span>ctrl+R</span></h4>
+  <div class="icon-att">Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
+  <div class="record"> <span class="record-title">Highest Record:
+  </span><span id="highestCPM">0 CPM</span> <span id="highestAccuracy">with 0% accuracy</span>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -259,26 +259,36 @@ body {
 
 .record {
   color: whitesmoke;
-  position: absolute;
+  position: fixed;
   display: flex;
-  justify-items: center;
+  justify-items: space-around;
   justify-content: left;
   font-size: 18px;
   margin-top: 600px;
   width: 90%;
   margin-left: 50px;
+  flex-direction: row;
 }
 
 .record span {
-  display: inline-block;
   padding: 5px 0;
   margin: 0 15px;
 }
 
-#highestAccuracy {
-  margin-left: -8px;
+#highestAccuracy, #previousAccuracy {
+  margin-left: -15px;
 }
 
 .record-title {
  color:  rgb(42, 215, 210);
+}
+
+.record1, .record2 {
+  display: inline-block;
+}
+
+.border-score {
+  margin: 0 10px;
+  color: #9a9998;
+  font-size: 20px;
 }

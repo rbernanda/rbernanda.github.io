@@ -9,7 +9,7 @@ const words = ['for', 'for in', 'for of', 'forEach', 'while', 'object', 'array',
  'onLoad', 'onMouseOver', 'onSelect', 'onSubmit', 'onUnload', 'href', 'anchor', 'window', 'or', 'and', "Angular", "React", "Vue"
 ]
 
-// selector
+// // \===============ALL SELECTORS===============/
 const quoteDisplayElement = document.getElementById('quoteDisplay')
 const quoteInputElement = document.getElementById('quoteInput')
 const timerElement = document.getElementById('timer')
@@ -21,7 +21,7 @@ const volumeSliderElement = document.getElementById('volume')
 const musicContainer = document.getElementById('music')
 
 
-// result variable
+// // \===============ALL NEEDED VARIABLES===============/
 let music = new Audio ('assets/lofi.mp3')
 let characterTyped = 0;
 let errors = 0;
@@ -35,21 +35,16 @@ let startTime = 60;
 let cpmLocalStorage = Number(localStorage.getItem("cpm"))
 let accuracyLocalStorage = Number(localStorage.getItem("accuracy"))
 
-function getRandomQuote(arr) {
-  let output = '';
-  for (let i = 0; i < 10; i++) {
-    
-    let index = Math.round(Math.random() * arr.length);
-    if (i === 9) output += words[index];
-    else output += `${words[index]} `; 
-  }
-
-  return output;
-}
-  
+let prevCPMLocalStorage = Number(localStorage.getItem("prevCPM"))
+let prevAccuracyLocalStorage = Number(localStorage.getItem("prevAccuracy"))
 
 let timerFlag = true;
 let practiceFlag = false; // for practice mode -- no time limit
+
+// // \===============ALL EVENTS LISTENER===============/
+buttonElement.addEventListener('click', reload)
+playButtonElement.addEventListener('click', playPause)
+volumeSliderElement.addEventListener('change', volumeChange)
 
 quoteInputElement.addEventListener('input', () => {
   const arrayQuote = quoteDisplayElement.querySelectorAll('span')
@@ -88,6 +83,21 @@ quoteInputElement.addEventListener('input', () => {
 
 })
 
+
+
+//\===============ALL FUNCTION===============/
+function getRandomQuote(arr) {
+  let output = '';
+  for (let i = 0; i < 10; i++) {
+    
+    let index = Math.round(Math.random() * arr.length);
+    if (i === 9) output += words[index];
+    else output += `${words[index]} `; 
+  }
+
+  return output;
+}
+
 function renderNewQuote() {
   const quote = getRandomQuote(words)
   quoteDisplayElement.innerHTML = ''
@@ -115,20 +125,16 @@ function startTimer() {
 
 
 function finish() {
-
   accuracy = Math.round(accuracy);
+  isHighestCPM = Math.round((characterTyped / 60) * 60)
   
-  totalcpm.innerText = `${Math.round((characterTyped / 60) * 60)} CPM`
+  totalcpm.innerText = `${isHighestCPM} CPM`
   wrongChart.innerText = `: ${totalErrorChart}`;
-
-  if (accuracy < 0) accuracy = "Under 15";
-  if (totalCorrectCharacter < 0) totalCorrectCharacter = "-Negative"
 
   accuracyValue.innerText = `: ${accuracy}%`;
   correctChart.innerText = `: ${totalCorrectCharacter}`;
 
-  isHighestCPM = Math.round((characterTyped / 60) * 60)
-
+  // checking highest record
   if (!cpmLocalStorage && !accuracyLocalStorage) {
     localStorage.setItem("accuracy", `${accuracy}`)
     localStorage.setItem("cpm", `${isHighestCPM}`)
@@ -139,16 +145,23 @@ function finish() {
     updateHighestRecord(accuracy, isHighestCPM)
   }
 
+  // checking prev record
+  if (!prevCPMLocalStorage && !prevAccuracyLocalStorage) {
+    localStorage.setItem("prevAccuracy", `${accuracy}`)
+    localStorage.setItem("prevCPM", `${isHighestCPM}`)
+  } else {
+    localStorage.setItem("prevAccuracy", `${accuracy}`)
+    localStorage.setItem("prevCPM", `${isHighestCPM}`)
+  }
+
   quoteInputElement.value = null
   quoteDisplayElement.style.display = 'none'
   scoreElement.style.display = 'block'
   noteElement.style.display = 'block'
-
 }
 
-buttonElement.addEventListener('click', reload)
-
 function reload() {
+
   characterTyped = 0;
   errors = 0;
   accuracy = 0;
@@ -163,22 +176,19 @@ function reload() {
   wrongChart.innerText = 0
   timer.innerText = "1:00"
 
-  quoteInputElement.value = null
+  quoteInputElement.value = null;
   quoteDisplayElement.style.display = 'block'
   scoreElement.style.display = 'none'
   noteElement.style.display = 'none'
 
   renderNewQuote()
+  updatePreviousRecord()
   quoteInputElement.focus()
 }
-
-playButtonElement.addEventListener('click', playPause)
-volumeSliderElement.addEventListener('change', volumeChange)
 
 let isPlaying = false
 
 function playPause() {
-  
   if (!isPlaying) {
     playButton.innerHTML = "||"
     music.play()
@@ -189,7 +199,6 @@ function playPause() {
     music.pause()
     isPlaying = false;
   }
-
 }
 
 function volumeChange(){
@@ -200,18 +209,29 @@ function displayMusicContainer() {
   musicContainer.style.display = 'flex'
 }
 
-window.onload = () => {
-  setTimeout(displayMusicContainer, 4000);
-  setTimeout(playPause, 3000)
+function updateHighestRecord(acc, cpm) {
+  highestAccuracy.innerText = `with ${acc}% accuracy`
+  highestCPM.innerText = `${cpm} CPM`
 }
 
-function updateHighestRecord(acc, cpm) {
-  highestCPM.innerText = `${cpm} CPM`
-  highestAccuracy.innerText = `with ${acc}% accuracy`
+function updatePreviousRecord() {
+  prevCPMLocalStorage = localStorage.getItem("prevCPM")
+  prevAccuracyLocalStorage = localStorage.getItem("prevAccuracy")
+
+  previousAccuracy.innerText = `with ${prevAccuracyLocalStorage}% accuracy`
+  previousCPM.innerText = `${prevCPMLocalStorage} CPM`
 }
+
+// ===============<>===============
 
 if (cpmLocalStorage && accuracyLocalStorage) {
   updateHighestRecord(accuracyLocalStorage, cpmLocalStorage)
+  updatePreviousRecord()
+}
+
+window.onload = () => {
+  setTimeout(displayMusicContainer, 4000);
+  setTimeout(playPause, 3000)
 }
 
 renderNewQuote()

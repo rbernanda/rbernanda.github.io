@@ -215,11 +215,13 @@ function updateHighestRecord(acc, cpm) {
 }
 
 function updatePreviousRecord() {
-  prevCPMLocalStorage = localStorage.getItem("prevCPM")
-  prevAccuracyLocalStorage = localStorage.getItem("prevAccuracy")
+  if (prevCPMLocalStorage && prevAccuracyLocalStorage) {
+    prevCPMLocalStorage = localStorage.getItem("prevCPM")
+    prevAccuracyLocalStorage = localStorage.getItem("prevAccuracy")
 
-  previousAccuracy.innerText = `with ${prevAccuracyLocalStorage}% accuracy`
-  previousCPM.innerText = `${prevCPMLocalStorage} CPM`
+    previousAccuracy.innerText = `with ${prevAccuracyLocalStorage}% accuracy`
+    previousCPM.innerText = `${prevCPMLocalStorage} CPM`
+  }
 }
 
 // ===============<>===============

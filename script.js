@@ -35,8 +35,8 @@ let startTime = 60;
 let cpmLocalStorage = Number(localStorage.getItem("cpm"))
 let accuracyLocalStorage = Number(localStorage.getItem("accuracy"))
 
-let prevCPMLocalStorage = Number(localStorage.getItem("prevCPM"))
-let prevAccuracyLocalStorage = Number(localStorage.getItem("prevAccuracy"))
+let prevCPMLocalStorage = localStorage.getItem("prevCPM")
+let prevAccuracyLocalStorage = localStorage.getItem("prevAccuracy")
 
 let timerFlag = true;
 let practiceFlag = false; // for practice mode -- no time limit
@@ -215,10 +215,10 @@ function updateHighestRecord(acc, cpm) {
 }
 
 function updatePreviousRecord() {
-  if (prevCPMLocalStorage && prevAccuracyLocalStorage) {
-    prevCPMLocalStorage = localStorage.getItem("prevCPM")
-    prevAccuracyLocalStorage = localStorage.getItem("prevAccuracy")
+  prevCPMLocalStorage = localStorage.getItem("prevCPM")
+  prevAccuracyLocalStorage = localStorage.getItem("prevAccuracy")
 
+  if (prevCPMLocalStorage && prevAccuracyLocalStorage) {
     previousAccuracy.innerText = `with ${prevAccuracyLocalStorage}% accuracy`
     previousCPM.innerText = `${prevCPMLocalStorage} CPM`
   }
